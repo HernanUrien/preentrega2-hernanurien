@@ -1,38 +1,23 @@
+const listaProductos = [
+    { nombre:"head", precio: 96000, codigo: "a" },
+    { nombre:"babolat", precio: 99999, codigo: "b" },
+    { nombre:"wilson por staff", precio: 105000, codigo: "c" },
+    { nombre:"wilson hammer", precio: 90199, codigo: "d" },
+    { nombre:"prince", precio: 87600, codigo: "e" }
+];
+
 const listaNuevo = "¿Que raqueta te gusta? \n" +
     "a - Head \n" +
     "b - Babolat \n" +
-    "c - Wilson \n" +
-    "d - Yonex \n" +
+    "c - Wilson Pro Staff \n" +
+    "d - Wilson Hammer \n" +
     "e - Prince \n"
 
-
 function eleccionProducto() {
-    let eleccion = prompt(listaNuevo)
-    if (eleccion !== "a" && eleccion !== "b" && eleccion !== "c" && eleccion !== "d" && eleccion !== "e" || eleccion === null) {
-        alert("❌Eleccion no valida❌")
-    } else {
-        switch (eleccion) {
-            case "a":
-                mensajeValor = "Head $96.000"
-                break
-            case "b":
-                mensajeValor = "Babolat $99.999"
-                break
-            case "c":
-                mensajeValor = "Wilson $105.000"
-                break
-            case "d":
-                mensajeValor = "Yonex $90.199"
-                break
-            case "e":
-                mensajeValor = "Prince $87.600"
-                break
-            default:
-                console.error("Ups, algo salio mal")
-        }
-        alert(mensajeValor)
-    }
+    let eleccion = prompt(listaNuevo).trim().toLowerCase();
+    console.log(listaProductos.filter((producto) => producto.nombre === eleccion || producto.codigo === eleccion))
 }
+
 
 let consulta = true
 
@@ -41,6 +26,24 @@ function consultarPrecio() {
         eleccionProducto()
         consulta = confirm("Queres saber el valor de alguna otra raqueta?")
     }
+}
+
+let carrito = [];
+
+function comprarProducto() {
+    let agregarProducto = true
+    while (agregarProducto) {
+    let eleccionCompra = prompt(listaNuevo).trim().toLowerCase();
+    for (let i = 0; i < listaProductos.length; i++)
+    if (eleccionCompra === listaProductos[i].nombre) {
+        carrito.push(listaProductos[i])
+        agregarProducto = confirm("¿Queres agregar otro producto")
+    } if (eleccionCompra === "" || eleccionCompra === null){
+        alert ("Eleccion inexistente!")
+        agregarProducto = confirm("¿Queres intentar de nuevo")
+    }
+}
+console.log(carrito)
 }
 
 let signup = true
